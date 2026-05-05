@@ -790,13 +790,28 @@ SEMED+Türkiye       & 6{,}084 & 7  & $+0.022$       & 0.037 & 0.55   \\
 \section*{Appendix C: Replication Code}
 \addcontentsline{toc}{section}{Appendix C: Replication Code}
 
-The full pipeline used to produce all tables and figures is included with this thesis:
+All code, tables, and figures are openly available at:
+\begin{center}
+\url{https://github.com/DovudAsadov/mobility-beliefs-redistribution}
+\end{center}
+
+\noindent The repository contains:
 \begin{itemize}[leftmargin=18pt,itemsep=2pt]
-    \item \texttt{analysis/build\_dataset.py} reads the LiTS IV \texttt{.dta} file and
-    constructs cleaned variables.
-    \item \texttt{analysis/regressions.py} estimates Equations~\eqref{eq:base} and
-    \eqref{eq:int}, and writes the tables and figures in \texttt{output/}.
-    \item All packages are pinned in the project's \texttt{uv} virtual environment.
+    \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/analysis/build_dataset.py}{\texttt{analysis/build\_dataset.py}}
+    --- reads the LiTS IV \texttt{.dta} file and constructs the cleaned analysis dataset.
+    \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/analysis/regressions.py}{\texttt{analysis/regressions.py}}
+    --- estimates Equations~\eqref{eq:base} and \eqref{eq:int} plus all robustness and
+    heterogeneity checks; writes Tables~\ref{tab:desc}--\ref{tab:regions} and
+    Figures~\ref{fig:country}--\ref{fig:region} into
+    \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/tree/main/output}{\texttt{output/}}.
+    \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/paper.tex}{\texttt{paper.tex}}
+    --- the LaTeX source of this proposal.
+    \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/README.md}{\texttt{README.md}}
+    --- step-by-step reproduction instructions and environment setup.
 \end{itemize}
+
+\noindent The raw LiTS IV microdata is licensed by the EBRD and not redistributed in the
+repository; it can be downloaded directly from the
+\href{https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html}{EBRD LiTS data portal}.
 
 \end{document}
