@@ -1,0 +1,7 @@
+mobility_var,n,coef_mobility,se_mobility,p_mobility,stars,r2
+mob_retro_parents_z,29361,0.1206,0.0228,0.0000,***,0.0519
+mob_retro_4y_z,29663,0.0201,0.0260,0.4379,,0.0394
+mob_prospect_kids_z,28261,0.0982,0.0299,0.0010,***,0.0479
+ladder_now_z,29929,-0.0845,0.0166,0.0000,***,0.0449
+ladder_diff_z,26863,-0.0154,0.0131,0.2380,,0.0398
+ladder_retro_z,29755,-0.0485,0.0140,0.0005,***,0.0415

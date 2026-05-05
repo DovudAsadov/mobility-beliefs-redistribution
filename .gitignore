@@ -1,0 +1,30 @@
+# Data (licensed; download from EBRD LiTS portal)
+lits_iv.dta
+analysis/lits_iv_clean.parquet
+analysis/lits_iv_clean.csv
+
+# Virtual environment
+.venv/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Old draft (not needed in repo)
+Research Methods Midterm.pdf.pdf

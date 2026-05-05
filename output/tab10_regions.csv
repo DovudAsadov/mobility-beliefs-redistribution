@@ -1,0 +1,6 @@
+region,n_obs,n_countries,coef,se,p,stars
+EU-CEE,9382,13,0.0053,0.0333,0.8746,
+Western Balkans,4482,6,0.1330,0.0725,0.0667,*
+EaP+Caucasus,4449,6,0.1532,0.0599,0.0105,**
+Central Asia,3864,5,0.4562,0.1073,0.0000,***
+SEMED+Türkiye,6084,7,0.0219,0.0364,0.5480,

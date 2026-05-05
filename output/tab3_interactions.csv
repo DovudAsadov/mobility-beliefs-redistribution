@@ -1,0 +1,7 @@
+mobility,moderator,n,beta_mob,se_mob,p_mob,beta_mod,se_mod,p_mod,beta_int,se_int,p_int,stars_int,r2
+mob_retro_parents_z,effort_belief,28780,0.1186,0.0241,0.0000,-0.0122,0.0257,0.6364,0.0024,0.0212,0.9108,,0.0523
+mob_retro_parents_z,injustice_belief,28780,0.1254,0.0257,0.0000,0.0384,0.0355,0.2797,-0.0184,0.0230,0.4246,,0.0526
+mob_prospect_kids_z,effort_belief,27739,0.0685,0.0289,0.0179,-0.0118,0.0286,0.6802,0.0690,0.0234,0.0032,***,0.0497
+mob_prospect_kids_z,injustice_belief,27739,0.1206,0.0337,0.0003,0.0267,0.0421,0.5266,-0.0769,0.0220,0.0005,***,0.0500
+ladder_diff_z,effort_belief,26438,-0.0205,0.0143,0.1510,-0.0034,0.0285,0.9051,0.0120,0.0157,0.4459,,0.0402
+ladder_diff_z,injustice_belief,26438,-0.0075,0.0139,0.5917,0.0309,0.0400,0.4393,-0.0284,0.0171,0.0976,*,0.0405

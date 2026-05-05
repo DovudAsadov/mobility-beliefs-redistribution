@@ -1,0 +1,5 @@
+cohort,mobility_var,n,coef,se,p,stars
+Born <1980 (older),mob_prospect_kids_z,16377,0.0889,0.0283,0.0017,***
+Born <1980 (older),ladder_diff_z,15395,-0.0284,0.0131,0.0308,**
+Born >=1980 (younger),mob_prospect_kids_z,11884,0.1129,0.0388,0.0036,***
+Born >=1980 (younger),ladder_diff_z,11468,0.0028,0.0175,0.8713,
