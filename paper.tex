@@ -67,7 +67,7 @@ EU/non-EU split, and conflates retrospective and prospective beliefs. Second, no
 study has explicitly tested whether the POUM effect is \emph{moderated} by individuals'
 attributions of inequality to effort versus injustice, despite clear theoretical
 predictions \citep{alesina2005fairness, benabou2006belief}. Third, the prior literature
-has not exploited the ten-step wealth ladder of LiTS, which yields a continuous expected
+has not exploited the ten-step wealth ladder, which yields a continuous expected
 mobility measure that is comparable across very different income regimes.
 
 A complementary strand uses information experiments to show that beliefs about one's own
@@ -81,7 +81,7 @@ the Life in Transition Survey IV (LiTS IV, 2022--23), the most recent EBRD/World
 covering 37 economies and 37{,}478 respondents \citep{ebrd2024lits}. The contribution is
 fourfold: (i) I separate retrospective, prospective and ``ladder-implied'' mobility beliefs
 and estimate their distinct associations with two redistribution measures; (ii) I
-introduce a fairness-belief moderator built on the LiTS IV ``most important factor for
+introduce a fairness-belief moderator built on the survey's ``most important factor for
 success'' question \citep{alesina2005fairness, alesina2018intergenerational}; (iii) I
 provide a joint ``horse-race'' specification that disentangles the broad-optimism channel
 of attitudinal items from the self-interest channel of ladder-based items; and (iv) I
@@ -123,7 +123,7 @@ checks rather than as a separate objective.
 
 \textbf{Research questions.}
 \begin{enumerate}[leftmargin=28pt,itemsep=2pt,label=\textit{RQ\arabic*.}]
-    \item Across the 37 LiTS IV economies, does a higher belief in upward
+    \item Across the 37 economies, does a higher belief in upward
     mobility---past, current, or expected---predict support for income redistribution,
     conditional on demographics and country fixed effects?
     \item Is the mobility--redistribution association attributable to a
@@ -187,10 +187,10 @@ term:
 \label{eq:int}
 \end{equation}
 where $F_{ic}\in\{0,1\}$ flags either belief in effort or belief in
-injustice (constructed from LiTS IV question Q4.06). This interaction approach follows
+injustice (constructed from question Q4.06). This interaction approach follows
 \citet{alesina2005fairness, benabou2006belief} and \citet{alesina2018intergenerational}.
 
-\textbf{Variables.} \emph{Outcomes} (LiTS IV codebook): (a) Q4.01f, agreement that ``the
+\textbf{Variables.} \emph{Outcomes} (codebook): (a) Q4.01f, agreement that ``the
 gap between the rich and the poor should be reduced'' on a 1--5 Likert (primary, pro-redistribution coded); (b) Q4.05e, a binary willingness to pay more taxes for poverty
 reduction (robustness). \emph{Mobility beliefs}: (i) Q4.01b retrospective (``I have done
 better than my parents''); (ii) Q4.01e prospective (``children born now will have a
@@ -201,11 +201,11 @@ Q2.36) is also computed. \emph{Fairness moderator}: a binary effort indicator
 ($Q4.06=1$) and a binary injustice indicator ($Q4.06\in\{3,4\}$). \emph{Controls}: age,
 age$^2$, female dummy, tertiary education, marital status, urban residence, and log
 monthly household income. Demographic information for the primary respondent is
-drawn from the household roster using the random-respondent code, following the LiTS IV
+drawn from the household roster using the random-respondent code, following the
 technical report.
 
 \textbf{Robustness layer.} The base specification is supplemented with five pre-specified
-checks: (i) population-weighted WLS using the LiTS IV \texttt{weight\_pop} variable for
+checks: (i) population-weighted WLS using the \texttt{weight\_pop} variable for
 representativeness; (ii) ordered-logit estimation on the 1--5 Likert outcome
 \citep{wooldridge2010econometric}; (iii) a linear-probability re-estimation on the
 binary willingness-to-pay outcome (RQ-relevant for $H_{3}$); (iv) sub-sample
@@ -253,7 +253,7 @@ Validation rests on five concrete strategies, each delivered in the empirical
 appendix. \emph{(i) Multiple operationalisations:} six mobility constructs (three
 attitudinal, three ladder-based) and two redistribution outcomes; concordant signs across
 them strengthen inference. \emph{(ii) Population-weighted WLS} (\cref{tab:weighted})
-re-estimates the main specification using the LiTS IV \texttt{weight\_pop} weights to
+re-estimates the main specification using the \texttt{weight\_pop} weights to
 recover population-representative coefficients. \emph{(iii) Ordered-logit re-estimation}
 (\cref{tab:ologit}) treats the 1--5 Likert outcome as ordinal rather than continuous
 \citep{wooldridge2010econometric}. \emph{(iv) Joint horse-race regression}
@@ -278,7 +278,7 @@ mobility variable; (b) interaction models for fairness-belief moderation; and
 (c) a linear-probability robustness model on the binary willingness-to-pay outcome. All
 analyses are implemented in Python~3.12 with \texttt{pandas}, \texttt{statsmodels}, and
 \texttt{pyreadstat}; the code, derived data, and outputs are version-controlled and
-reproducible from the public LiTS IV \texttt{.dta} file using the scripts in
+reproducible from the public \texttt{.dta} file using the scripts in
 \texttt{analysis/}. Listwise deletion is documented (and the differential availability of
 income reduces $N$ from 35{,}766 to about 28{,}000); a Heckman-type extension is left for
 future work.
@@ -288,14 +288,23 @@ future work.
 \section{Discussion}
 
 Estimates from \cref{eq:base} support the dual-channel hypothesis $H_{1}$
-(\cref{tab:main}). The attitudinal arm: mobility items load \emph{positively} on
-redistribution support ($\beta=+0.121$, $p<0.001$ for the parents-comparison item;
-$\beta=+0.098$, $p<0.01$ for the prospective ``children will have a better life''
-item), consistent with the generalised-optimism prediction. The self-interest
-(POUM) arm: ladder-based measures load negatively---current ladder position
-($\beta=-0.085$, $p<0.001$) and realised four-year ladder gain ($\beta=-0.049$,
-$p<0.001$)---while expected ladder mobility carries a negative but insignificant
-coefficient ($\beta=-0.015$, $p=0.24$).
+(\cref{tab:main}; the country-level pattern is shown in \cref{fig:country}). The
+attitudinal arm: mobility items load \emph{positively} on redistribution support
+($\beta=+0.121$, $p<0.001$ for the parents-comparison item; $\beta=+0.098$, $p<0.01$
+for the prospective ``children will have a better life'' item), consistent with the
+generalised-optimism prediction. The self-interest (POUM) arm: ladder-based measures
+load negatively---current ladder position ($\beta=-0.085$, $p<0.001$) and realised
+four-year ladder gain ($\beta=-0.049$, $p<0.001$)---while expected ladder mobility
+carries a negative but insignificant coefficient ($\beta=-0.015$, $p=0.24$).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\textwidth]{output/fig_country_means.png}
+\caption{Country-level means of redistribution support (Q4.01f) versus prospective
+mobility (Q4.01e), LiTS~IV. Each dot is one of 37 economies; colour denotes the
+five-region grouping; dotted lines mark the sample means.}
+\label{fig:country}
+\end{figure}
 
 The \emph{joint horse-race} regression in \cref{tab:joint} addresses RQ2 directly
 and sharpens the channel decomposition. With all four representative mobility variables
@@ -311,15 +320,25 @@ analytically distinct from, expected income trajectories
 \citep{alesina2018intergenerational, stantcheva2021perceptions}. Failing to disentangle
 the two---as in much of the prior literature---masks the POUM effect.
 
-The fairness-belief interactions (\cref{tab:int}) deliver the slope asymmetry
-predicted by $H_{2}$. For prospective mobility, the \emph{effort} interaction is
-positive ($\pi=+0.069$, $p<0.01$)---effort-believers steepen the attitudinal
-slope---while the \emph{injustice} interaction is negative ($\pi=-0.077$, $p<0.001$),
-flattening and at the margin reversing it. For expected ladder mobility, the injustice
-interaction is marginally significant ($\pi=-0.028$, $p\approx0.10$), in the same
-direction.
+The fairness-belief interactions (\cref{tab:int}, \cref{fig:pred}) deliver the slope
+asymmetry predicted by $H_{2}$. For prospective mobility, the \emph{effort}
+interaction is positive ($\pi=+0.069$, $p<0.01$)---effort-believers steepen the
+attitudinal slope---while the \emph{injustice} interaction is negative
+($\pi=-0.077$, $p<0.001$), flattening and at the margin reversing it. For expected
+ladder mobility, the injustice interaction is marginally significant
+($\pi=-0.028$, $p\approx0.10$), in the same direction.
 
-Exploratory heterogeneity tests confirm context-dependence. Across the five LiTS IV regions
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.78\textwidth]{output/fig_pred_interaction.png}
+\caption{Predicted standardised redistribution support against prospective mobility
+belief, by fairness belief. Country-fixed-effects OLS with country-clustered SEs;
+shaded bands are 95\% CIs. The slope is steeper for effort-believers and flatter for
+those who do not endorse effort as the main driver of success (see \cref{tab:int}).}
+\label{fig:pred}
+\end{figure}
+
+Exploratory heterogeneity tests confirm context-dependence. Across the five regions
 (\cref{tab:regions}, \cref{fig:region}), prospective mobility loads most
 strongly positive in Central Asia ($\beta=+0.456$, $p<0.001$), is essentially zero in
 EU-CEE, and is positive but weaker in the Western Balkans, EaP+Caucasus, and
@@ -334,39 +353,18 @@ preserves all signs and now lifts \emph{expected} ladder mobility to significanc
 (\cref{tab:wtp}), all three mobility measures load \emph{positively}, mirroring
 the attitudinal but not the ladder channel---consistent with the dual-channel framing.
 
-In sum, LiTS IV supports the dual-channel POUM mechanism of $H_{1}$: ladder-based
-self-interest pulls redistribution demand down, attitudinal optimism pulls it up, and
-both effects are conditional on fairness beliefs and institutional region.
-
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.78\textwidth]{output/fig_country_means.png}
-\caption{Country-level means of redistribution support (Q4.01f) versus prospective
-mobility (Q4.01e), LiTS~IV. Each dot is one of 37 economies.}
-\label{fig:country}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.78\textwidth]{output/fig_pred_interaction.png}
-\caption{Predicted standardised redistribution support against prospective mobility
-belief, by fairness belief. Constructed from a country-fixed-effects OLS regression with
-clustered standard errors. The slope is steeper for effort-believers; injustice-believers
-exhibit a flatter slope (see \cref{tab:int}).}
-\label{fig:pred}
-\end{figure}
-
-\FloatBarrier
-\clearpage
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.62\textwidth]{output/fig_region_coefs.png}
-\caption{Coefficient on standardised prospective-mobility belief by LiTS IV region, with
-95\% confidence intervals (country-clustered SE). The cross-region heterogeneity replaces
-the binary EU/non-EU framing in \citet{cojocaru2014prospects}.}
+\includegraphics[width=0.74\textwidth]{output/fig_region_coefs.png}
+\caption{Coefficient on standardised prospective-mobility belief by LiTS IV region,
+with 95\% country-clustered confidence intervals. The cross-region heterogeneity
+replaces the binary EU/non-EU framing in \citet{cojocaru2014prospects}.}
 \label{fig:region}
 \end{figure}
+
+In sum, the data support the dual-channel POUM mechanism of $H_{1}$: ladder-based
+self-interest pulls redistribution demand down, attitudinal optimism pulls it up, and
+both effects are conditional on fairness beliefs and institutional region.
 
 \vspace{-6pt}
 % =====================================================================
@@ -392,32 +390,27 @@ that could bias the analysis.
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[x=0.78cm,y=0.45cm]
+\begin{tikzpicture}[x=0.95cm,y=0.62cm]
 % Tasks: (start, length, row, label)
 \foreach \start/\len/\row/\lab in {%
-  0/1/1/{1. Data acquisition \& cleaning},%
-  0.5/1.5/2/{2. Variable construction \& descriptives},%
-  1.5/1.5/3/{3. Main OLS estimation},%
-  2.5/1.5/4/{4. Fairness-belief interaction models},%
-  3.5/1.5/5/{5. Robustness \& heterogeneity checks},%
-  4.5/1.5/6/{6. Draft results section},%
-  5.5/1.5/7/{7. Full thesis draft},%
-  6.5/1.0/8/{8. Supervisor revisions \& proofreading},%
-  7.0/1.0/9/{9. Defense preparation \& submission}}{%
+  0/2/1/{1. Data preparation \& descriptives},%
+  1.5/2.5/2/{2. Estimation: main, interactions, robustness, heterogeneity},%
+  3.5/2.5/3/{3. Full thesis draft (results, intro, lit review)},%
+  5.5/1.5/4/{4. Supervisor revisions \& proofreading},%
+  6.5/1.5/5/{5. Defense preparation \& submission}}{%
   \filldraw[fill=blue!30,draw=blue!60!black]
-    (\start,-\row+0.2) rectangle (\start+\len,-\row-0.4);
+    (\start,-\row+0.25) rectangle (\start+\len,-\row-0.45);
   \node[anchor=east,font=\footnotesize] at (-0.15,-\row-0.1) {\lab};
 }
 % Month grid + labels (after bars so labels sit on top)
 \foreach \m [count=\i from 0] in {May,Jun,Jul,Aug,Sep,Oct,Nov,Dec}{%
-  \draw[gray!40,thin] (\i,0.4) -- (\i,-9.6);
-  \node[font=\small] at (\i+0.5,0.85) {\m};
+  \draw[gray!40,thin] (\i,0.45) -- (\i,-5.65);
+  \node[font=\small] at (\i+0.5,0.9) {\m};
 }
-\draw[gray!60,thick] (0,0.4) -- (8,0.4);
-\draw[gray!60,thick] (0,-9.6) -- (8,-9.6);
+\draw[gray!60,thick] (0,0.45) -- (8,0.45);
+\draw[gray!60,thick] (0,-5.65) -- (8,-5.65);
 \end{tikzpicture}
-\caption{Planned timeline (May--December 2026). Bars indicate active periods; overlap
-represents iterative work.}
+\caption{Planned timeline (May--December 2026).}
 \label{fig:gantt}
 \end{figure}
 
@@ -709,7 +702,7 @@ Expected ladder mobility    & 25{,}393 & $+0.031^{***}$ & 0.006 & $<0.001$ & 0.1
 \begin{table}[!ht]
 \small
 \centering
-\caption{Population-weighted (WLS) re-estimation of the main specification using LiTS IV
+\caption{Population-weighted (WLS) re-estimation of the main specification using
 \texttt{weight\_pop} weights. Each row is a separate WLS regression with country fixed
 effects and country-clustered SEs.}
 \label{tab:weighted}
@@ -811,7 +804,7 @@ Born $\geq$1980 & Expected ladder mobility   & 11{,}468 & $+0.003$       & 0.017
 \begin{table}[!ht]
 \small
 \centering
-\caption{Five-region split using LiTS IV country grouping. DV: standardised redistribution
+\caption{Five-region split. DV: standardised redistribution
 support; mobility variable: \texttt{mob\_prospect\_kids\_z}.}
 \label{tab:regions}
 \begin{tabular}{lrrrrr}
