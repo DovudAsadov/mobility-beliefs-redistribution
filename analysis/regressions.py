@@ -21,10 +21,37 @@ import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
+from adjustText import adjust_text
 
 
 warnings.filterwarnings("ignore")
-sns.set_theme(context="paper", style="whitegrid")
+sns.set_theme(context="paper", style="white")
+
+plt.rcParams.update({
+    "font.family": "serif",
+    "font.serif": ["DejaVu Serif", "Times New Roman", "Times"],
+    "mathtext.fontset": "dejavuserif",
+    "font.size": 10,
+    "axes.titlesize": 11,
+    "axes.labelsize": 10,
+    "axes.titleweight": "semibold",
+    "axes.edgecolor": "#333333",
+    "axes.linewidth": 0.6,
+    "axes.grid": True,
+    "grid.color": "#dddddd",
+    "grid.linewidth": 0.5,
+    "grid.alpha": 0.7,
+    "legend.fontsize": 8.5,
+    "legend.frameon": False,
+    "xtick.labelsize": 9,
+    "ytick.labelsize": 9,
+    "xtick.color": "#444444",
+    "ytick.color": "#444444",
+    "savefig.dpi": 200,
+    "savefig.bbox": "tight",
+    "savefig.pad_inches": 0.06,
+    "figure.dpi": 110,
+})
 
 DATA = "analysis/lits_iv_clean.parquet"
 
@@ -59,6 +86,24 @@ REGIONS: dict[str, list[int]] = {
     "EaP+Caucasus":    [2, 3, 4, 11, 22, 29],
     "Central Asia":    [16, 18, 23, 33, 37],
     "SEMED+Türkiye":   [15, 20, 25, 34, 35, 38, 39],
+}
+
+# ISO-3 codes for the 37 LiTS IV economies (country variable -> ISO-3)
+ISO3: dict[int, str] = {
+    1: "ALB", 2: "ARM", 3: "AZE", 4: "BLR", 5: "BIH", 6: "BGR", 7: "HRV",
+    8: "CZE", 10: "EST", 11: "GEO", 12: "DEU", 13: "GRC", 14: "HUN",
+    15: "JOR", 16: "KAZ", 17: "XKX", 18: "KGZ", 19: "LVA", 20: "LBN",
+    21: "LTU", 22: "MDA", 23: "MNG", 24: "MNE", 25: "MAR", 26: "MKD",
+    27: "POL", 28: "ROU", 29: "RUS", 30: "SRB", 31: "SVK", 32: "SVN",
+    33: "TJK", 34: "TUN", 35: "TUR", 37: "UZB", 38: "PSE", 39: "DZA",
+}
+
+REGION_COLORS: dict[str, str] = {
+    "EU-CEE":          "#2C6E91",
+    "Western Balkans": "#D98E32",
+    "EaP+Caucasus":    "#3E8E5A",
+    "Central Asia":    "#C13B3B",
+    "SEMED+Türkiye":   "#7A5BAA",
 }
 
 
@@ -346,18 +391,35 @@ def main() -> None:
 
     # Forest plot of region coefficients
     if len(tab10):
-        fig, ax = plt.subplots(figsize=(6.4, 3.8))
-        order = tab10.sort_values("coef")
+        fig, ax = plt.subplots(figsize=(6.6, 3.9))
+        order = tab10.sort_values("coef").reset_index(drop=True)
         y_pos = np.arange(len(order))
-        ax.errorbar(order["coef"], y_pos, xerr=1.96 * order["se"],
-                    fmt="o", color="tab:blue", capsize=3)
-        ax.axvline(0, lw=0.6, color="grey", linestyle="--")
+        # alternating row backgrounds
+        for i in y_pos:
+            if i % 2 == 0:
+                ax.axhspan(i - 0.5, i + 0.5, color="#f5f5f5", zorder=0)
+        ax.axvline(0, lw=0.7, color="#777777", linestyle="--", zorder=1)
+        colors = [REGION_COLORS[r] for r in order["region"]]
+        for xi, yi, se, c in zip(order["coef"], y_pos, order["se"], colors):
+            ax.errorbar(xi, yi, xerr=1.96 * se, fmt="o", color=c,
+                        ecolor=c, elinewidth=1.4, capsize=4, capthick=1.2,
+                        markersize=6.5, markeredgecolor="white", markeredgewidth=0.8,
+                        zorder=3)
+        # N + significance annotation on the right of each row
+        xmax = (order["coef"] + 1.96 * order["se"]).max()
+        for yi, row in order.iterrows():
+            label = f"n={int(row['n_obs']):,} ({int(row['n_countries'])} c.) {row['stars']}".strip()
+            ax.text(xmax * 1.05, yi, label, va="center", fontsize=8, color="#444444")
         ax.set_yticks(y_pos)
-        ax.set_yticklabels(order["region"])
-        ax.set_xlabel("Coefficient on standardised prospective-mobility belief\n(95% CI, country-clustered SE)")
-        ax.set_title("Region heterogeneity: mobility belief → redistribution support")
+        ax.set_yticklabels(order["region"], fontsize=9.5)
+        ax.set_ylim(-0.6, len(order) - 0.4)
+        ax.set_xlabel("Coefficient on standardised prospective-mobility belief  (95% CI)")
+        ax.set_title("Region heterogeneity: mobility belief $\\rightarrow$ redistribution support",
+                     pad=10)
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
         plt.tight_layout()
-        plt.savefig("output/fig_region_coefs.png", dpi=160)
+        plt.savefig("output/fig_region_coefs.png")
         plt.close(fig)
 
     # ---- Figure 1: country means redistribution vs mobility belief --------
@@ -368,16 +430,41 @@ def main() -> None:
                n=("redist_5", "size"))
           .reset_index()
     )
-    fig, ax = plt.subplots(figsize=(7.0, 4.6))
-    ax.scatter(cmap_data["mob"], cmap_data["redist"], s=24, alpha=0.85)
-    for _, r in cmap_data.iterrows():
-        ax.annotate(int(r["country"]), (r["mob"], r["redist"]),
-                    fontsize=7, alpha=0.7, xytext=(2, 2), textcoords="offset points")
-    ax.set_xlabel("Country mean prospective mobility belief\n(higher = more optimistic about kids' future)")
-    ax.set_ylabel("Country mean support for redistribution\n('gap should be reduced', 1–5)")
-    ax.set_title("Cross-country pattern of mobility optimism and redistribution support")
+    cmap_data["iso3"] = cmap_data["country"].astype(int).map(ISO3)
+    cmap_data["region"] = cmap_data["country"].astype(int).map(region_of)
+
+    fig, ax = plt.subplots(figsize=(7.6, 5.0))
+    for region, color in REGION_COLORS.items():
+        sub = cmap_data[cmap_data["region"] == region]
+        ax.scatter(sub["mob"], sub["redist"], s=58, alpha=0.92,
+                   color=color, label=region,
+                   edgecolor="white", linewidth=0.8, zorder=3)
+    # subtle reference lines at sample means
+    ax.axvline(cmap_data["mob"].mean(), color="#bbbbbb", lw=0.6, ls=":", zorder=1)
+    ax.axhline(cmap_data["redist"].mean(), color="#bbbbbb", lw=0.6, ls=":", zorder=1)
+    texts = [
+        ax.text(r["mob"], r["redist"], r["iso3"], fontsize=7.5,
+                color="#222222", zorder=4)
+        for _, r in cmap_data.iterrows()
+    ]
+    adjust_text(
+        texts, ax=ax,
+        arrowprops=dict(arrowstyle="-", color="#888888", lw=0.4, alpha=0.7),
+        expand=(1.15, 1.25),
+        min_arrow_len=4,
+    )
+    ax.set_xlabel("Country mean prospective mobility belief\n(higher = more optimistic about children's future)")
+    ax.set_ylabel("Country mean support for redistribution\n(\"gap should be reduced\", 1–5)")
+    ax.set_title("Cross-country pattern of mobility optimism and redistribution support",
+                 pad=10)
+    leg = ax.legend(title="Region", loc="lower left", fontsize=8.5, title_fontsize=9,
+                    frameon=True, framealpha=0.92, edgecolor="#cccccc",
+                    handletextpad=0.4, borderpad=0.5)
+    leg.get_frame().set_linewidth(0.5)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
     plt.tight_layout()
-    plt.savefig("output/fig_country_means.png", dpi=160)
+    plt.savefig("output/fig_country_means.png")
     plt.close(fig)
 
     # ---- Figure 2: predicted redistribution by mobility, split by belief --
@@ -385,23 +472,53 @@ def main() -> None:
     sub["interaction"] = sub["mob_prospect_kids_z"] * sub["effort_belief"]
     X = make_design(sub, "mob_prospect_kids_z", controls + ["effort_belief", "interaction"])
     res = cluster_ols(sub["redist_z"], X, sub["country"])
-    grid = np.linspace(-2, 2, 41)
-    fig, ax = plt.subplots(figsize=(6.5, 4.4))
-    for belief, lab, c in [(1, "Believes effort drives success", "tab:red"),
-                          (0, "Doesn't believe effort drives success", "tab:blue")]:
-        slope = res.params["mob_prospect_kids_z"] + belief * res.params["interaction"]
-        intercept = (res.params["const"]
-                     + belief * res.params["effort_belief"]
-                     + sub[controls].mean().to_numpy() @ res.params[controls].to_numpy()
-                     + 0)  # country FE collapse to mean ~ 0 in standardised outcome
-        ax.plot(grid, intercept + slope * grid, label=f"{lab} (slope={slope:+.3f})", color=c)
-    ax.axhline(0, lw=0.5, color="grey")
-    ax.set_xlabel("Prospective mobility belief (z)")
+    grid = np.linspace(-2, 2, 81)
+    fig, ax = plt.subplots(figsize=(6.8, 4.6))
+
+    # Build covariance for slope and CI band on each line
+    cov = res.cov_params()
+    b_mob = res.params["mob_prospect_kids_z"]
+    b_int = res.params["interaction"]
+    b_mod = res.params["effort_belief"]
+    b_const = res.params["const"]
+    ctrl_mean = sub[controls].mean()
+    ctrl_offset = ctrl_mean.to_numpy() @ res.params[controls].to_numpy()
+
+    palette = [
+        (1, "Believes effort drives success", "#C13B3B"),
+        (0, "Doesn't believe effort drives success", "#2C6E91"),
+    ]
+    for belief, lab, c in palette:
+        slope = b_mob + belief * b_int
+        intercept = b_const + belief * b_mod + ctrl_offset
+        y_hat = intercept + slope * grid
+        # variance of slope at given belief
+        var_slope = (cov.loc["mob_prospect_kids_z", "mob_prospect_kids_z"]
+                     + (belief ** 2) * cov.loc["interaction", "interaction"]
+                     + 2 * belief * cov.loc["mob_prospect_kids_z", "interaction"])
+        se_grid = np.sqrt(np.maximum(var_slope, 0)) * np.abs(grid)
+        ax.fill_between(grid, y_hat - 1.96 * se_grid, y_hat + 1.96 * se_grid,
+                        color=c, alpha=0.12, linewidth=0)
+        ax.plot(grid, y_hat, color=c, lw=2.0,
+                label=f"{lab}  (slope = {slope:+.3f})")
+
+    # rug at the bottom for data density
+    y0 = ax.get_ylim()[0]
+    rug_x = sub["mob_prospect_kids_z"].sample(min(3000, len(sub)), random_state=0)
+    ax.plot(rug_x, np.full(len(rug_x), y0), "|", color="#888888", alpha=0.15, ms=4)
+
+    ax.axhline(0, lw=0.5, color="#888888")
+    ax.set_xlabel("Prospective mobility belief ($z$)")
     ax.set_ylabel("Predicted standardised redistribution support")
-    ax.set_title("Mobility belief × fairness belief interaction\n(LiTS IV, 37 economies)")
-    ax.legend(fontsize=8)
+    ax.set_title("Mobility belief $\\times$ fairness belief interaction  (LiTS IV, 37 economies)",
+                 pad=10)
+    leg = ax.legend(loc="upper left", fontsize=9, frameon=True, framealpha=0.92,
+                    edgecolor="#cccccc", handlelength=2.2)
+    leg.get_frame().set_linewidth(0.5)
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
     plt.tight_layout()
-    plt.savefig("output/fig_pred_interaction.png", dpi=160)
+    plt.savefig("output/fig_pred_interaction.png")
     plt.close(fig)
 
     print("\nAll tables/figures written to output/")

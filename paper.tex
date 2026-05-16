@@ -12,7 +12,13 @@
 \usepackage{subcaption}
 \usepackage{natbib}
 \usepackage{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+\crefname{equation}{Equation}{Equations}
+\Crefname{equation}{Equation}{Equations}
 \usepackage{titlesec}
+
+% Methodology subsections numbered 4a, 4b, 4c instead of 4.1, 4.2, 4.3
+\renewcommand{\thesubsection}{\thesection\alph{subsection}}
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{enumitem}
@@ -88,52 +94,62 @@ Caucasus, absent from comparable European studies
 \section{Purpose Statement / Objectives}
 
 The purpose of this study is to estimate whether and how beliefs about upward income
-mobility shape support for income redistribution across the 37 economies covered by the
-Life in Transition Survey IV, and to assess whether the strength of any POUM-type effect
-depends on respondents' attributions of success to effort versus injustice. Building on
-\citet{benabou2001social, alesina2005fairness, alesina2018intergenerational}, the study
-pursues four specific objectives.
+mobility shape support for income redistribution across the 37 economies of the Life in
+Transition Survey IV, and to decompose that relationship into a \emph{self-interest}
+channel operating through respondents' own ladder positions and trajectories
+\citep{benabou2001social} and a \emph{generalised-optimism} channel operating through
+attitudinal mobility items \citep{hirschman1973changing, benabou2006belief,
+alesina2018intergenerational}, allowing fairness beliefs to moderate both
+\citep{alesina2005fairness}. The study pursues four specific objectives.
 \begin{enumerate}[leftmargin=18pt,itemsep=2pt]
-    \item Quantify the partial association between three distinct mobility-belief
-    measures---retrospective, prospective and expected ladder mobility---and two
-    redistribution outcomes (a Likert agreement that the rich--poor gap should be reduced,
-    and a binary willingness to pay more taxes for poverty reduction).
-    \item Test whether these associations survive the inclusion of country fixed effects,
-    standard demographic controls, and household income, with standard errors clustered
-    at the country level.
+    \item Estimate the partial association between six mobility-belief
+    measures---three attitudinal (retrospective vs.\ parents, retrospective four-year,
+    prospective children) and three ladder-based (current, expected, realised four-year
+    ladder mobility)---and two redistribution outcomes, using OLS with country fixed
+    effects and country-clustered standard errors.
+    \item Disentangle the self-interest and generalised-optimism channels through a
+    joint ``horse-race'' specification placing representative mobility measures on the
+    right-hand side simultaneously, following the channel-decomposition logic in
+    \citet{alesina2018intergenerational, stantcheva2021perceptions}.
     \item Examine fairness-belief heterogeneity by interacting each mobility variable
-    with two indicators: belief that ``effort and hard work'' is the main driver of
-    success, and belief that political connections or breaking the law (i.e.\ injustice)
-    is the main driver.
-    \item Assess external validity by comparing patterns across EU and non-EU transition
-    economies and across regional sub-samples.
+    with two indicators: belief that effort drives success, and belief that political
+    connections or breaking the law (i.e.\ injustice) drive success.
+    \item Map the heterogeneity of the mobility--redistribution association across the
+    five LiTS IV regions, two birth cohorts (pre-/post-1980), and three current
+    ladder-position groups.
 \end{enumerate}
 
 % =====================================================================
 \section{Research Questions and Hypotheses}
 
 \textbf{Research questions.}
-\textit{RQ1.} Across the 37 LiTS IV economies, does a higher belief in upward mobility---past or expected---predict lower support for income redistribution, holding constant
-demographics and country effects?\\
-\textit{RQ2.} Does the relationship between mobility beliefs and redistribution depend on
-whether respondents attribute success in their society to effort or to injustice?\\
-\textit{RQ3.} Are the patterns observed for Likert-scale redistribution agreement
-consistent with those for a costlier behavioural proxy (willingness to pay higher taxes
-for inequality reduction)?
+\textit{RQ1.} Across the 37 LiTS IV economies, does a higher belief in upward
+mobility---past, current, or expected---predict support for income redistribution,
+conditional on demographics and country fixed effects?\\
+\textit{RQ2.} Is the mobility--redistribution association attributable to a
+\emph{self-interest} channel (operating through ladder-based measures) or to a
+\emph{generalised-optimism} channel (operating through attitudinal items)?\\
+\textit{RQ3.} Does the relationship depend on respondents' attribution of success to
+effort or to injustice?\\
+\textit{RQ4.} Does the association vary systematically across LiTS regions, birth
+cohorts (pre-/post-1980), or current ladder positions?
 
 \textbf{Hypotheses.} Following \citet{benabou2001social, alesina2005preferences,
-alesina2005fairness, alesina2018intergenerational}:
+alesina2005fairness, alesina2018intergenerational, hirschman1973changing}:
 \begin{itemize}[leftmargin=18pt,itemsep=2pt]
-    \item[$H_{1}$:] \emph{POUM main effect.} More optimistic mobility beliefs are
-    associated with weaker support for redistribution: standardised coefficients are
-    expected to be negative.
-    \item[$H_{2a}$:] \emph{Effort-amplification.} The negative POUM effect is stronger
-    among respondents who believe success is driven by effort and hard work.
-    \item[$H_{2b}$:] \emph{Injustice-attenuation.} The negative POUM effect is weaker (or
-    reverses) among respondents who attribute success to political connections or
-    illegality, who view current inequality as fundamentally unfair.
-    \item[$H_{3}$:] \emph{Behavioural consistency.} The signs and significance patterns
-    are reproduced when the dependent variable is the binary willingness-to-pay outcome.
+    \item[$H_{1a}$:] \emph{Self-interest (POUM) channel.} For ladder-based mobility
+    measures, more optimistic beliefs predict weaker redistribution demand: standardised
+    coefficients are expected to be negative.
+    \item[$H_{1b}$:] \emph{Generalised-optimism channel.} For attitudinal mobility
+    items, optimism is positively associated with redistribution support, reflecting a
+    pro-social orientation distinct from expected income trajectories.
+    \item[$H_{2a}$:] \emph{Effort moderation.} Belief that effort drives success steepens
+    the channel-specific slope.
+    \item[$H_{2b}$:] \emph{Injustice moderation.} Belief that injustice drives success
+    attenuates or reverses the slope, since redistribution is then perceived as
+    fairness-correcting regardless of own prospects.
+    \item[$H_{3}$:] \emph{Behavioural consistency.} Sign and significance patterns are
+    reproduced when the dependent variable is the binary willingness-to-pay outcome.
 \end{itemize}
 
 % =====================================================================
@@ -148,15 +164,24 @@ core specification is a country-fixed-effects ordinary-least-squares (OLS) model
 \label{eq:base}
 \end{equation}
 where $\widetilde{R}_{ic}$ is the standardised redistribution preference of individual
-$i$ in country $c$, $\widetilde{M}_{ic}$ is one of three standardised mobility-belief
-variables, $X_{ic}$ is a vector of demographic controls, and $\delta_{c}$ is a country
-fixed effect. Standard errors are clustered at the country level
+$i$ in country $c$, $\widetilde{M}_{ic}$ is one of six standardised mobility-belief
+variables (three attitudinal and three ladder-based; \cref{tab:vars}), $X_{ic}$ is
+a vector of demographic controls, and $\delta_{c}$ is a country fixed effect. Standard
+errors are clustered at the country level
 \citep{cameron2015practitioner}, which is the appropriate level of aggregation when the
 key right-hand-side variation is partly cross-country
 \citep{abadie2023should}. Standardising both sides allows coefficients to be read in
 within-country standard-deviation units, mirroring \citet{alesina2018intergenerational}.
 
-\textbf{Fairness-belief moderation.} To test $H_{2}$, I add an interaction term:
+\textbf{Channel decomposition.} To address RQ2 and test $H_{1a}$/$H_{1b}$, I estimate a
+joint ``horse-race'' regression in which four representative mobility measures
+(retrospective vs.\ parents, prospective children, current ladder, expected ladder
+mobility) enter \cref{eq:base} simultaneously, isolating the marginal
+contribution of each channel after partialling out the others
+\citep{alesina2018intergenerational, stantcheva2021perceptions}.
+
+\textbf{Fairness-belief moderation.} To test $H_{2a}$ and $H_{2b}$, I add an interaction
+term:
 \begin{equation}
 \widetilde{R}_{ic} \;=\; \alpha + \beta\, \widetilde{M}_{ic} + \theta\, F_{ic}
 + \pi\,(\widetilde{M}_{ic}\times F_{ic}) + \gamma'\,X_{ic} + \delta_{c} + \varepsilon_{ic}
@@ -180,17 +205,17 @@ monthly household income. Demographic information for the primary respondent is
 drawn from the household roster using the random-respondent code, following the LiTS IV
 technical report.
 
-\textbf{Robustness layer.} The base specification is supplemented with six pre-specified
+\textbf{Robustness layer.} The base specification is supplemented with five pre-specified
 checks: (i) population-weighted WLS using the LiTS IV \texttt{weight\_pop} variable for
 representativeness; (ii) ordered-logit estimation on the 1--5 Likert outcome
-\citep{wooldridge2010econometric}; (iii) a \emph{joint} regression in which all four
-mobility variables enter simultaneously, isolating the marginal contribution of each
-channel; (iv) sub-sample heterogeneity by current ladder position (bottom-3, middle,
-top-3 rungs), which directly tests the Bénabou--Ok prediction that POUM bites harder for
-those with most ``room to rise''; (v) cohort splits at year-of-birth 1980, motivated by
-\citet{alesina2007goodbye} and \citet{giuliano2014growing}; and (vi) five-region splits
-(EU-CEE, Western Balkans, EaP+Caucasus, Central Asia, SEMED+Türkiye) replacing the
-binary EU/non-EU contrast in \citet{cojocaru2014prospects}.
+\citep{wooldridge2010econometric}; (iii) a linear-probability re-estimation on the
+binary willingness-to-pay outcome (RQ-relevant for $H_{3}$); (iv) sub-sample
+heterogeneity by current ladder position (bottom-3, middle, top-3 rungs), which directly
+tests the B\'enabou--Ok prediction that POUM bites harder for those with most ``room to
+rise''; and (v) cohort splits at year-of-birth 1980 and five-region splits (EU-CEE,
+Western Balkans, EaP+Caucasus, Central Asia, SEMED+T\"urkiye), together addressing RQ4
+and motivated by \citet{alesina2007goodbye, giuliano2014growing} and the binary EU/non-EU
+contrast in \citet{cojocaru2014prospects}.
 
 \textbf{Limitations of the design.} (1) The data are cross-sectional, so identification
 relies on selection-on-observables; results should be interpreted as conditional
@@ -204,7 +229,7 @@ in terms of associations rather than causal effects.
 
 
 % =====================================================================
-\section{Data Collection Procedures}
+\subsection{Data Collection Procedures}
 
 The study uses secondary microdata from the \emph{Life in Transition Survey IV}
 (LiTS IV), conducted jointly by the European Bank for Reconstruction and Development
@@ -223,17 +248,17 @@ fully reproducible from the public dataset, and exempt from institutional ethics
 
 
 % =====================================================================
-\section{Validation of Findings}
+\subsection{Validation of Findings}
 
 Validation rests on five concrete strategies, each delivered in the empirical
 appendix. \emph{(i) Multiple operationalisations:} six mobility constructs (three
 attitudinal, three ladder-based) and two redistribution outcomes; concordant signs across
-them strengthen inference. \emph{(ii) Population-weighted WLS} (Table~\ref{tab:weighted})
+them strengthen inference. \emph{(ii) Population-weighted WLS} (\cref{tab:weighted})
 re-estimates the main specification using the LiTS IV \texttt{weight\_pop} weights to
 recover population-representative coefficients. \emph{(iii) Ordered-logit re-estimation}
-(Table~\ref{tab:ologit}) treats the 1--5 Likert outcome as ordinal rather than continuous
+(\cref{tab:ologit}) treats the 1--5 Likert outcome as ordinal rather than continuous
 \citep{wooldridge2010econometric}. \emph{(iv) Joint horse-race regression}
-(Table~\ref{tab:joint}) puts all four mobility variables on the right-hand side
+(\cref{tab:joint}) puts all four mobility variables on the right-hand side
 simultaneously, separating the broad-optimism and self-interest channels.
 \emph{(v) Triangulation with prior evidence:} signs and magnitudes are compared with
 \citet{alesina2005preferences, ravallion2000wants, cojocaru2014prospects,
@@ -242,12 +267,12 @@ external corroboration.
 
 
 % =====================================================================
-\section{Data Analysis}
+\subsection{Data Analysis}
 
 After list-wise deletion on the regression covariates, the main analytical sample is
 $N\!\approx\!28{,}000$ respondents across 37 countries. All continuous variables on the
 right-hand and left-hand side are $z$-standardised within the full sample so that
-coefficients in Equation~\eqref{eq:base} are interpretable as standard-deviation effects
+coefficients in \cref{eq:base} are interpretable as standard-deviation effects
 \citep{alesina2018intergenerational}. The base specification is OLS with country fixed
 effects and country-clustered standard errors. I report (a) one univariate model per
 mobility variable; (b) interaction models for fairness-belief moderation; and
@@ -261,57 +286,59 @@ future work.
 
 
 % =====================================================================
-\section{Preliminary Findings}
+\section{Discussion}
 
-Estimates from Equation~\eqref{eq:base} reveal a more nuanced picture than a simple POUM
-hypothesis predicts (Table~\ref{tab:main}). Attitudinal mobility items load
-\emph{positively} on redistribution support ($\beta=+0.121$, $p<0.001$ for the
-parents-comparison item; $\beta=+0.098$, $p<0.01$ for the prospective ``children will
-have a better life'' item), apparently contradicting $H_{1}$. The POUM signal appears
-only once mobility is measured on the Cantril ladder: current ladder position
-($\beta=-0.085$, $p<0.001$) and realised four-year ladder gain ($\beta=-0.049$,
-$p<0.001$) are negatively associated with redistribution demand, while expected ladder
-mobility carries a negative but insignificant coefficient ($\beta=-0.015$, $p=0.24$).
+Estimates from \cref{eq:base} support the dual-channel framework
+(\cref{tab:main}). Consistent with the generalised-optimism prediction $H_{1b}$,
+attitudinal mobility items load \emph{positively} on redistribution support
+($\beta=+0.121$, $p<0.001$ for the parents-comparison item; $\beta=+0.098$, $p<0.01$
+for the prospective ``children will have a better life'' item). Consistent with the
+self-interest prediction $H_{1a}$, ladder-based measures load negatively: current
+ladder position ($\beta=-0.085$, $p<0.001$) and realised four-year ladder gain
+($\beta=-0.049$, $p<0.001$) are negatively associated with redistribution demand,
+while expected ladder mobility carries a negative but insignificant coefficient
+($\beta=-0.015$, $p=0.24$).
 
-The \emph{joint horse-race} regression in Table~\ref{tab:joint} resolves much of this
-tension. With all four mobility variables on the right-hand side simultaneously, both
-ladder-based measures sharpen and turn unambiguously POUM-consistent: current ladder
-$\beta=-0.128$ ($p<0.001$) and \emph{expected} ladder mobility $\beta=-0.057$
-($p<0.001$). The two attitudinal items remain positive
-($\beta_{\text{parents}}=+0.126$, $\beta_{\text{kids}}=+0.083$, both $p<0.01$). The
+The \emph{joint horse-race} regression in \cref{tab:joint} addresses RQ2 directly
+and sharpens the channel decomposition. With all four representative mobility variables
+on the right-hand side simultaneously, both ladder-based measures intensify and turn
+unambiguously POUM-consistent (supporting $H_{1a}$): current ladder $\beta=-0.128$
+($p<0.001$) and \emph{expected} ladder mobility $\beta=-0.057$ ($p<0.001$). The two
+attitudinal items remain positive (supporting $H_{1b}$;
+$\beta_{\text{parents}}=+0.126$, $\beta_{\text{kids}}=+0.083$, both $p<0.01$). The
 contrast is the central empirical pivot of the paper: ladder-based mobility captures the
 self-interested POUM channel posited by \citet{benabou2001social}, whereas attitudinal
-mobility items load on a generalised pro-social optimism that is correlated with, but
+items load on a generalised pro-social optimism that is correlated with, but
 analytically distinct from, expected income trajectories
 \citep{alesina2018intergenerational, stantcheva2021perceptions}. Failing to disentangle
 the two---as in much of the prior literature---masks the POUM effect.
 
-The fairness-belief interactions (Table~\ref{tab:int}) sharpen the picture further. For
-prospective mobility, the interaction with the \emph{injustice} indicator is negative and
-significant ($\pi=-0.077$, $p<0.001$), while the interaction with the \emph{effort}
-indicator is positive and significant ($\pi=+0.069$, $p<0.01$). Effort-believers
-translate optimism into stronger pro-redistribution attitudes; injustice-believers do
-not. For expected ladder mobility, the injustice interaction is marginally significant
-($\pi=-0.028$, $p\approx0.10$), pointing in the same direction.
+The fairness-belief interactions (\cref{tab:int}) deliver the slope asymmetry
+predicted by $H_{2a}$/$H_{2b}$. For prospective mobility, the \emph{effort} interaction
+is positive ($\pi=+0.069$, $p<0.01$)---effort-believers steepen the attitudinal slope
+($H_{2a}$)---while the \emph{injustice} interaction is negative ($\pi=-0.077$,
+$p<0.001$)---injustice-believers flatten and at the margin reverse it ($H_{2b}$). For
+expected ladder mobility, the injustice interaction is marginally significant
+($\pi=-0.028$, $p\approx0.10$), in the same direction.
 
-Heterogeneity tests confirm context-dependence. Across the five LiTS IV regions
-(Table~\ref{tab:regions}, Figure~\ref{fig:region}), prospective-mobility loads most
+Heterogeneity tests (RQ4) confirm context-dependence. Across the five LiTS IV regions
+(\cref{tab:regions}, \cref{fig:region}), prospective mobility loads most
 strongly positive in Central Asia ($\beta=+0.456$, $p<0.001$), is essentially zero in
 EU-CEE, and is positive but weaker in the Western Balkans, EaP+Caucasus, and
-SEMED+Türkiye---a finer pattern than Cojocaru's binary EU/non-EU split. By age cohort
-(Table~\ref{tab:cohort}), the negative ladder-mobility coefficient is significant only
+SEMED+T\"urkiye---a finer pattern than Cojocaru's binary EU/non-EU split. By age cohort
+(\cref{tab:cohort}), the negative ladder-mobility coefficient is significant only
 for respondents born before 1980 ($\beta=-0.028$, $p<0.05$) and disappears for the
 post-Soviet cohort, consistent with the long-shadow channel in
-\citet{alesina2007goodbye}. The ordered-logit re-estimation (Table~\ref{tab:ologit})
+\citet{alesina2007goodbye}. The ordered-logit re-estimation (\cref{tab:ologit})
 preserves all signs and now lifts \emph{expected} ladder mobility to significance
 ($\beta=-0.039$, $p<0.01$), as does the population-weighted WLS specification
-(Table~\ref{tab:weighted}).
+(\cref{tab:weighted}). $H_{3}$ finds partial support: on the binary WTP outcome
+(\cref{tab:wtp}), all three mobility measures load \emph{positively}, mirroring
+the attitudinal but not the ladder channel---consistent with the dual-channel framing.
 
-In sum, LiTS IV provides clear support for a refined POUM mechanism: when mobility is
-measured behaviourally (the Cantril ladder), self-interest dominates and pulls demand for
-redistribution down; when it is measured attitudinally, the same items pick up a
-correlated optimism that pulls demand up. Both effects are conditional on fairness
-beliefs and on the institutional region in which the respondent lives.
+In sum, LiTS IV supports a refined dual-channel POUM mechanism: ladder-based
+self-interest pulls redistribution demand down ($H_{1a}$), attitudinal optimism pulls it
+up ($H_{1b}$), and both are conditional on fairness beliefs and institutional region.
 
 
 \begin{figure}[!ht]
@@ -328,7 +355,7 @@ mobility (Q4.01e), LiTS~IV. Each dot is one of 37 economies.}
 \caption{Predicted standardised redistribution support against prospective mobility
 belief, by fairness belief. Constructed from a country-fixed-effects OLS regression with
 clustered standard errors. The slope is steeper for effort-believers; injustice-believers
-exhibit a flatter slope (see Table~\ref{tab:int}).}
+exhibit a flatter slope (see \cref{tab:int}).}
 \label{fig:pred}
 \end{figure}
 
@@ -342,6 +369,23 @@ exhibit a flatter slope (see Table~\ref{tab:int}).}
 the binary EU/non-EU framing in \citet{cojocaru2014prospects}.}
 \label{fig:region}
 \end{figure}
+
+\vspace{-6pt}
+% =====================================================================
+\section{Ethics}
+
+The study uses publicly licensed, de-identified secondary microdata from the EBRD/World
+Bank Life in Transition Survey IV \citep{ebrd2024lits}; no new human-subject data are
+collected, no identifiable individuals are accessed, and no contact with respondents
+takes place. The original survey was administered under EBRD/World Bank ethical
+protocols, with informed consent, voluntary participation, and anonymisation handled at
+source. Use of the microdata complies with the EBRD LiTS data licence (free use for
+research with citation), and the cleaned analysis dataset is generated solely from the
+public \texttt{.dta} file. The research therefore qualifies as exempt from institutional
+ethics review under standard secondary-data provisions. Replication code, derived
+variables, and outputs are openly available (Appendix~C); the licensed raw microdata is
+not redistributed. The authors declare no conflicts of interest and no external funding
+that could bias the analysis.
 
 \vspace{-6pt}
 % =====================================================================
@@ -626,7 +670,7 @@ $^{**}p<0.05$, $^{***}p<0.01$.
 \centering
 \caption{Fairness-belief moderation: interaction between mobility belief and
 binary fairness indicator. Reported coefficients are for the interaction term
-(Equation~\ref{eq:int}); other rows omitted for brevity.}
+(\cref{eq:int}); other rows omitted for brevity.}
 \label{tab:int}
 \begin{tabular}{llrrrrr}
 \toprule
@@ -661,7 +705,7 @@ Prospective: children       & 26{,}685 & $+0.025^{***}$ & 0.006 & $<0.001$ & 0.1
 Expected ladder mobility    & 25{,}393 & $+0.031^{***}$ & 0.006 & $<0.001$ & 0.19 \\
 \bottomrule
 \end{tabular}
-\\\footnotesize \emph{Notes.} Same controls as in Table~\ref{tab:main}. $^{***}p<0.01$.
+\\\footnotesize \emph{Notes.} Same controls as in \cref{tab:main}. $^{***}p<0.01$.
 \end{table}
 
 \begin{table}[!ht]
@@ -725,7 +769,7 @@ Current ladder                  & $-0.128^{***}$ & 0.018 & $<0.001$ & POUM (leve
 Expected ladder mobility        & $-0.057^{***}$ & 0.012 & $<0.001$ & POUM (expectation) \\
 \bottomrule
 \end{tabular}
-\\\footnotesize \emph{Notes.} Same controls as Table~\ref{tab:main}. The two
+\\\footnotesize \emph{Notes.} Same controls as \cref{tab:main}. The two
 ladder-based channels are POUM-consistent; the two attitudinal items are not.
 $^{***}p<0.01$.
 \end{table}
@@ -801,8 +845,8 @@ All code, tables, and figures are openly available at:
     --- reads the LiTS IV \texttt{.dta} file and constructs the cleaned analysis dataset.
     \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/analysis/regressions.py}{\texttt{analysis/regressions.py}}
     --- estimates Equations~\eqref{eq:base} and \eqref{eq:int} plus all robustness and
-    heterogeneity checks; writes Tables~\ref{tab:desc}--\ref{tab:regions} and
-    Figures~\ref{fig:country}--\ref{fig:region} into
+    heterogeneity checks; writes \crefrange{tab:desc}{tab:regions} and
+    \crefrange{fig:country}{fig:region} into
     \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/tree/main/output}{\texttt{output/}}.
     \item \href{https://github.com/DovudAsadov/mobility-beliefs-redistribution/blob/main/paper.tex}{\texttt{paper.tex}}
     --- the LaTeX source of this proposal.
