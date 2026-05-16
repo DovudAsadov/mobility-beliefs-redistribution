@@ -22,21 +22,16 @@ output/
 ## Reproduce
 
 ```bash
-# 1. Set up environment
-python -m venv .venv
-source .venv/bin/activate
-pip install pandas pyreadstat statsmodels matplotlib seaborn pyarrow
+# 1. Set up environment (uses uv: https://docs.astral.sh/uv/)
+uv sync
 
 # 2. Download LiTS IV microdata (.dta) from
 #    https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html
 #    Place the file at the repo root as `lits_iv.dta`.
 
 # 3. Build cleaned dataset and run all regressions
-python analysis/build_dataset.py
-python analysis/regressions.py
-
-# 4. Compile the paper
-pdflatex paper.tex && pdflatex paper.tex
+uv run python analysis/build_dataset.py
+uv run python analysis/regressions.py
 ```
 
 ## Data note

@@ -1,0 +1,24 @@
+[project]
+name = "mobility-beliefs-redistribution"
+version = "0.1.0"
+description = "Do mobility beliefs reduce demand for redistribution? Evidence from LiTS IV across 37 transition economies."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Dovud Asadov", email = "d.asadov@newuu.uz" },
+]
+dependencies = [
+    "pandas>=2.0",
+    "pyreadstat>=1.2",
+    "statsmodels>=0.14",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+    "pyarrow>=14.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["analysis"]

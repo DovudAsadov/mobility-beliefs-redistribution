@@ -6,6 +6,9 @@ analysis/lits_iv_clean.csv
 # Virtual environment
 .venv/
 
+# uv
+.uv/
+
 # LaTeX build artifacts
 *.aux
 *.log
