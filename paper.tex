@@ -91,7 +91,7 @@ Caucasus, absent from comparable European studies
 
 
 % =====================================================================
-\section{Purpose Statement / Objectives}
+\section{Objectives}
 
 The purpose of this study is to estimate whether and how beliefs about upward income
 mobility shape support for income redistribution across the 37 economies of the Life in
@@ -122,24 +122,27 @@ checks rather than as a separate objective.
 \section{Research Questions and Hypotheses}
 
 \textbf{Research questions.}
-\textit{RQ1.} Across the 37 LiTS IV economies, does a higher belief in upward
-mobility---past, current, or expected---predict support for income redistribution,
-conditional on demographics and country fixed effects?\\
-\textit{RQ2.} Is the mobility--redistribution association attributable to a
-\emph{self-interest} channel (operating through ladder-based measures) or to a
-\emph{generalised-optimism} channel (operating through attitudinal items)?\\
-\textit{RQ3.} Does the relationship depend on respondents' attribution of success to
-effort or to injustice?
+\begin{enumerate}[leftmargin=28pt,itemsep=2pt,label=\textit{RQ\arabic*.}]
+    \item Across the 37 LiTS IV economies, does a higher belief in upward
+    mobility---past, current, or expected---predict support for income redistribution,
+    conditional on demographics and country fixed effects?
+    \item Is the mobility--redistribution association attributable to a
+    \emph{self-interest} channel (operating through ladder-based measures) or to a
+    \emph{generalised-optimism} channel (operating through attitudinal items)?
+    \item Does the relationship depend on respondents' attribution of success to
+    effort or to injustice?
+\end{enumerate}
 
 \textbf{Hypotheses.} Following \citet{benabou2001social, alesina2005preferences,
 alesina2005fairness, alesina2018intergenerational, hirschman1973changing}:
 \begin{itemize}[leftmargin=18pt,itemsep=2pt]
-    \item[$H_{1a}$:] \emph{Self-interest (POUM) channel.} For ladder-based mobility
-    measures, more optimistic beliefs predict weaker redistribution demand: standardised
-    coefficients are expected to be negative.
-    \item[$H_{1b}$:] \emph{Generalised-optimism channel.} For attitudinal mobility
-    items, optimism is positively associated with redistribution support, reflecting a
-    pro-social orientation distinct from expected income trajectories.
+    \item[$H_{1}$:] \emph{Dual-channel mobility effect.} Mobility beliefs shape
+    redistribution preferences through two distinct, opposing channels: \emph{ladder-based}
+    measures (current position, expected and realised ladder gains) capture
+    self-interested POUM and predict weaker redistribution demand ($\beta<0$), while
+    \emph{attitudinal} mobility items (parents-comparison, prospective children) capture
+    a generalised pro-social optimism distinct from expected income trajectories and
+    predict stronger redistribution support ($\beta>0$).
     \item[$H_{2}$:] \emph{Asymmetric fairness moderation.} Belief that effort drives
     success steepens the channel-specific slope, while belief that injustice drives
     success attenuates or reverses it---redistribution becoming a fairness-correcting
@@ -169,8 +172,8 @@ key right-hand-side variation is partly cross-country
 \citep{abadie2023should}. Standardising both sides allows coefficients to be read in
 within-country standard-deviation units, mirroring \citet{alesina2018intergenerational}.
 
-\textbf{Channel decomposition.} To address RQ2 and test $H_{1a}$/$H_{1b}$, I estimate a
-joint ``horse-race'' regression in which four representative mobility measures
+\textbf{Channel decomposition.} To address RQ2 and test the dual-channel hypothesis
+$H_{1}$, I estimate a joint ``horse-race'' regression in which four representative mobility measures
 (retrospective vs.\ parents, prospective children, current ladder, expected ladder
 mobility) enter \cref{eq:base} simultaneously, isolating the marginal
 contribution of each channel after partialling out the others
@@ -284,24 +287,23 @@ future work.
 % =====================================================================
 \section{Discussion}
 
-Estimates from \cref{eq:base} support the dual-channel framework
-(\cref{tab:main}). Consistent with the generalised-optimism prediction $H_{1b}$,
-attitudinal mobility items load \emph{positively} on redistribution support
-($\beta=+0.121$, $p<0.001$ for the parents-comparison item; $\beta=+0.098$, $p<0.01$
-for the prospective ``children will have a better life'' item). Consistent with the
-self-interest prediction $H_{1a}$, ladder-based measures load negatively: current
-ladder position ($\beta=-0.085$, $p<0.001$) and realised four-year ladder gain
-($\beta=-0.049$, $p<0.001$) are negatively associated with redistribution demand,
-while expected ladder mobility carries a negative but insignificant coefficient
-($\beta=-0.015$, $p=0.24$).
+Estimates from \cref{eq:base} support the dual-channel hypothesis $H_{1}$
+(\cref{tab:main}). The attitudinal arm: mobility items load \emph{positively} on
+redistribution support ($\beta=+0.121$, $p<0.001$ for the parents-comparison item;
+$\beta=+0.098$, $p<0.01$ for the prospective ``children will have a better life''
+item), consistent with the generalised-optimism prediction. The self-interest
+(POUM) arm: ladder-based measures load negatively---current ladder position
+($\beta=-0.085$, $p<0.001$) and realised four-year ladder gain ($\beta=-0.049$,
+$p<0.001$)---while expected ladder mobility carries a negative but insignificant
+coefficient ($\beta=-0.015$, $p=0.24$).
 
 The \emph{joint horse-race} regression in \cref{tab:joint} addresses RQ2 directly
 and sharpens the channel decomposition. With all four representative mobility variables
 on the right-hand side simultaneously, both ladder-based measures intensify and turn
-unambiguously POUM-consistent (supporting $H_{1a}$): current ladder $\beta=-0.128$
-($p<0.001$) and \emph{expected} ladder mobility $\beta=-0.057$ ($p<0.001$). The two
-attitudinal items remain positive (supporting $H_{1b}$;
-$\beta_{\text{parents}}=+0.126$, $\beta_{\text{kids}}=+0.083$, both $p<0.01$). The
+unambiguously POUM-consistent: current ladder $\beta=-0.128$ ($p<0.001$) and
+\emph{expected} ladder mobility $\beta=-0.057$ ($p<0.001$). The two attitudinal items
+remain positive ($\beta_{\text{parents}}=+0.126$, $\beta_{\text{kids}}=+0.083$, both
+$p<0.01$). The two arms of $H_{1}$ are therefore jointly supported. The
 contrast is the central empirical pivot of the paper: ladder-based mobility captures the
 self-interested POUM channel posited by \citet{benabou2001social}, whereas attitudinal
 items load on a generalised pro-social optimism that is correlated with, but
@@ -332,9 +334,9 @@ preserves all signs and now lifts \emph{expected} ladder mobility to significanc
 (\cref{tab:wtp}), all three mobility measures load \emph{positively}, mirroring
 the attitudinal but not the ladder channel---consistent with the dual-channel framing.
 
-In sum, LiTS IV supports a refined dual-channel POUM mechanism: ladder-based
-self-interest pulls redistribution demand down ($H_{1a}$), attitudinal optimism pulls it
-up ($H_{1b}$), and both are conditional on fairness beliefs and institutional region.
+In sum, LiTS IV supports the dual-channel POUM mechanism of $H_{1}$: ladder-based
+self-interest pulls redistribution demand down, attitudinal optimism pulls it up, and
+both effects are conditional on fairness beliefs and institutional region.
 
 
 \begin{figure}[!ht]
