@@ -22,14 +22,17 @@ output/
 ## Reproduce
 
 ```bash
-# 1. Set up environment (uses uv: https://docs.astral.sh/uv/)
+# 1. Install uv (https://docs.astral.sh/uv/) if not already installed
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 2. Set up environment (creates .venv and installs dependencies)
 uv sync
 
-# 2. Download LiTS IV microdata (.dta) from
+# 3. Download LiTS IV microdata (.dta) from
 #    https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html
 #    Place the file at the repo root as `lits_iv.dta`.
 
-# 3. Build cleaned dataset and run all regressions
+# 4. Build cleaned dataset and run all regressions
 uv run python analysis/build_dataset.py
 uv run python analysis/regressions.py
 ```
