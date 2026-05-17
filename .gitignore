@@ -31,3 +31,8 @@ __pycache__/
 
 # Old draft (not needed in repo)
 Research Methods Midterm.pdf.pdf
+
+# Build artefacts (no longer tracked; generated from paper.tex)
+paper.pdf
+paper.docx
+paper_v2.*
